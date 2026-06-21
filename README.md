@@ -1,51 +1,44 @@
 # ☕ JavaSpresso
 
-App web para consultar de forma ordenada la sintaxis y el funcionamiento de Java.
-Hecha con **React + Vite** sobre **Node**. Es una **PWA**: instalable y funciona sin conexión.
+App de escritorio para consultar de forma ordenada la sintaxis y el funcionamiento de Java.
+Una **herramienta personal** que uso de apoyo mientras trabajo con Java: referencia rápida,
+atajos de IDE y plantillas de código a un clic.
 
-## Características
+> ⚡ Esta app está **vibecodeada** (hecha a base de prompts con un asistente de IA). No es un
+> producto pulido ni pretende serlo: es una herramienta práctica para mi día a día.
 
-- **10 categorías** ordenadas de lo básico a lo avanzado (Fundamentos → POO → Streams).
-- **Buscador instantáneo** que filtra por título, descripción y código.
-- **Resaltado de sintaxis Java** propio (sin dependencias externas).
-- **Botón de copiar** en cada ejemplo de código.
-- **Modo claro / oscuro** (recuerda tu preferencia).
-- **PWA**: botón "Instalar app" y precarga offline (service worker).
-- Diseño responsive.
+## Qué incluye
 
-## Cómo ejecutarla
+- **Referencia de Java** ordenada por categorías (fundamentos, POO, colecciones, streams…).
+- **Buscador** instantáneo sobre todo el contenido.
+- **Atajos de IDE** (IntelliJ IDEA, VS Code, Eclipse) para macOS y Windows/Linux.
+- **Plantillas / live templates** (`sout`, `psvm`, `fori`, postfix…).
+- Tema **Cyberpunk Neon** en la interfaz; los ejemplos de código usan los colores de IntelliJ (Darcula).
+
+## Stack
+
+React + Vite, empaquetada como app de escritorio con Electron.
+
+## Uso
+
+En el navegador (desarrollo):
 
 ```bash
-npm install     # instalar dependencias (solo la primera vez)
-npm run dev     # arranca en http://localhost:5173
+npm install
+npm run dev
 ```
 
-Otros comandos:
+Compilar la app de escritorio (genera el `.dmg` en `release/`):
 
 ```bash
-npm run build   # compila para producción en /dist
-npm run preview # sirve la versión compilada
+npm run dist
 ```
 
-## Contenido
+> La app no está firmada con certificado de Apple. La primera vez:
+> clic derecho sobre la app → **Abrir**.
 
-Fundamentos · Control de flujo · Métodos · POO · Strings · Arrays y Colecciones ·
-Excepciones · Genéricos · Programación funcional · E/S y utilidades.
+## Notas
 
-## Cómo agregar o editar temas
-
-Todo el contenido vive en un solo archivo: [`src/data/content.js`](src/data/content.js).
-Cada tema tiene esta forma:
-
-```js
-{
-  id: 'mi-tema',
-  title: 'Título del tema',
-  body: 'Explicación breve.',
-  code: `// ejemplo de código Java`,
-  notes: ['Nota opcional 1', 'Nota opcional 2'],
-}
-```
-
-Agrega objetos a `topics` dentro de la categoría que quieras (o crea una categoría nueva).
-La navegación y el buscador se actualizan solos.
+- El contenido vive en `src/data/` (`content.js`, `shortcuts.js`, `templates.js`) — fácil de editar.
+- La config de empaquetado está en `electron-builder.yml`.
+- Si `package.json` pierde la config de Electron, corre `./restore-electron.sh`.

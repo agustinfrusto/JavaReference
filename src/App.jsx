@@ -1,6 +1,10 @@
 import { useMemo, useState, useEffect } from 'react'
 import { content } from './data/content'
+import { shortcutMatches } from './data/shortcuts'
+import { templateMatches } from './data/templates'
 import CodeBlock from './components/CodeBlock'
+import Shortcuts from './components/Shortcuts'
+import Templates from './components/Templates'
 
 export default function App() {
   const [query, setQuery] = useState('')
@@ -54,8 +58,22 @@ export default function App() {
       .filter((cat) => cat.topics.length > 0)
   }, [query])
 
+  const SC_ID = 'atajos'
+  const TPL_ID = 'plantillas'
   const searching = query.trim().length > 0
-  const visible = searching ? filtered : filtered.filter((c) => c.id === activeCat)
+  const showShortcutsView = !searching && activeCat === SC_ID
+  const showTemplatesView = !searching && activeCat === TPL_ID
+  const isSpecialView = showShortcutsView || showTemplatesView
+  const visible =
+    searching
+      ? filtered
+      : isSpecialView
+        ? []
+        : filtered.filter((c) => c.id === activeCat)
+  const scInResults = searching && shortcutMatches(query)
+  const tplInResults = searching && templateMatches(query)
+  const isEmpty =
+    visible.length === 0 && !isSpecialView && !scInResults && !tplInResults
   const totalTemas = content.reduce((n, c) => n + c.topics.length, 0)
 
   const goTo = (id) => {
@@ -87,6 +105,24 @@ export default function App() {
               <span className="nav-count">{cat.topics.length}</span>
             </button>
           ))}
+
+          <button
+            className={
+              !searching && activeCat === TPL_ID ? 'nav-item featured active' : 'nav-item featured'
+            }
+            onClick={() => goTo(TPL_ID)}
+          >
+            <span className="nav-icon">⚡</span>
+            <span>Plantillas (sout…)</span>
+          </button>
+
+          <button
+            className={!searching && activeCat === SC_ID ? 'nav-item active' : 'nav-item'}
+            onClick={() => goTo(SC_ID)}
+          >
+            <span className="nav-icon">⌨️</span>
+            <span>Atajos de IDE</span>
+          </button>
         </nav>
 
         {installPrompt && (
@@ -119,7 +155,7 @@ export default function App() {
             </p>
           )}
 
-          {visible.length === 0 && (
+          {isEmpty && (
             <div className="empty">
               <p>Sin resultados para “{query}”.</p>
               <button onClick={() => setQuery('')}>Limpiar búsqueda</button>
@@ -147,6 +183,42 @@ export default function App() {
               ))}
             </section>
           ))}
+
+          {showTemplatesView && (
+            <section className="category">
+              <h2 className="cat-title">
+                <span>⚡</span> Plantillas de código (live templates)
+              </h2>
+              <Templates />
+            </section>
+          )}
+
+          {tplInResults && (
+            <section className="category">
+              <h2 className="cat-title">
+                <span>⚡</span> Plantillas de código (live templates)
+              </h2>
+              <Templates />
+            </section>
+          )}
+
+          {showShortcutsView && (
+            <section className="category">
+              <h2 className="cat-title">
+                <span>⌨️</span> Atajos de IDE
+              </h2>
+              <Shortcuts />
+            </section>
+          )}
+
+          {scInResults && (
+            <section className="category">
+              <h2 className="cat-title">
+                <span>⌨️</span> Atajos de IDE
+              </h2>
+              <Shortcuts query={query} />
+            </section>
+          )}
         </div>
 
         <footer className="footer">

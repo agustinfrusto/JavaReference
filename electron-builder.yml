@@ -1,0 +1,13 @@
+# Configuración de empaquetado de Electron (la lee electron-builder automáticamente).
+# Se mantiene fuera de package.json para que no se pierda si ese archivo se revierte.
+appId: com.javaspresso.app
+productName: JavaSpresso
+directories:
+  output: release
+files:
+  - dist/**/*
+  - electron/**/*
+mac:
+  target: dmg
+  category: public.app-category.developer-tools
+  icon: build/icon.icns

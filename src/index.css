@@ -1,9 +1,11 @@
 :root {
-  --accent: #ff5d8f;        /* rosa/magenta (prompt de kitty) */
-  --accent-soft: #e5c07b;   /* amarillo cálido */
-  --green: #98c379;         /* verde (cursor/strings) */
-  --cyan: #56b6c2;          /* cian (rutas/tipos) */
-  --blue: #61afef;
+  /* Paleta Cyberpunk Neon (tema de kitty) */
+  --accent: #d300c4;        /* magenta neón */
+  --accent-soft: #f57800;   /* naranja neón */
+  --green: #00ff9c;         /* verde neón (cursor) */
+  --cyan: #0abdc6;          /* cian (color de primer plano de la terminal) */
+  --blue: #1c61c2;
+  --purple: #711c91;
   --radius: 6px;            /* esquinas más cuadradas, estilo terminal */
   --sidebar-w: 290px;
   /* Tipografía monoespaciada en toda la app, como en la terminal */
@@ -23,14 +25,14 @@
 }
 
 :root[data-theme='dark'] {
-  --bg: #161616;            /* fondo oscuro cálido tipo kitty */
-  --bg-elev: #1c1c1c;
-  --bg-code: #121212;
-  --text: #d6d2c4;         /* crema/off-white cálido */
-  --text-soft: #8a8678;
-  --border: #2c2c2c;
-  --nav-hover: #242424;
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 8px 24px rgba(0, 0, 0, 0.35);
+  --bg: #000b1e;            /* azul-negro profundo (Cyberpunk Neon) */
+  --bg-elev: #04122c;       /* paneles ligeramente elevados */
+  --bg-code: #0a1733;       /* chips de código inline */
+  --text: #c7e6ea;          /* cian claro casi blanco */
+  --text-soft: #5f8c99;     /* cian apagado */
+  --border: #123e7c;        /* azul neón */
+  --nav-hover: #0a1c3d;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.6), 0 8px 28px rgba(10, 189, 198, 0.08);
 }
 
 * {
@@ -89,11 +91,14 @@ body {
   font-size: 18px;
   font-weight: 700;
   letter-spacing: -0.02em;
+  color: var(--cyan);
+  text-shadow: 0 0 10px rgba(10, 189, 198, 0.5);  /* glow neón */
 }
 
 .brand h1::before {
   content: '❯ ';
-  color: var(--green);   /* prompt verde estilo terminal */
+  color: var(--accent);   /* prompt magenta neón */
+  text-shadow: 0 0 10px rgba(211, 0, 196, 0.6);
 }
 
 .brand p {
@@ -113,11 +118,13 @@ body {
   align-items: center;
   gap: 10px;
   width: 100%;
-  padding: 9px 12px;
+  padding: 10px 12px;
   border: none;
   background: transparent;
-  color: var(--text-soft);
-  font-size: 14px;
+  color: var(--text);
+  font-size: 14.5px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
   font-family: inherit;
   text-align: left;
   border-radius: 8px;
@@ -127,13 +134,14 @@ body {
 
 .nav-item:hover {
   background: var(--nav-hover);
-  color: var(--text);
+  color: var(--accent);
 }
 
 .nav-item.active {
   background: var(--accent);
   color: #fff;
-  font-weight: 600;
+  font-weight: 700;
+  box-shadow: 0 0 12px rgba(211, 0, 196, 0.45);  /* glow magenta */
 }
 
 .nav-icon {
@@ -230,8 +238,9 @@ body {
 }
 
 .search:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 20%, transparent);
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--cyan) 25%, transparent),
+    0 0 16px rgba(10, 189, 198, 0.25);  /* glow cian */
 }
 
 .content {
@@ -255,6 +264,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--accent);
+  text-shadow: 0 0 10px rgba(211, 0, 196, 0.4);  /* glow magenta */
   font-weight: 700;
   margin-bottom: 20px;
   display: flex;
@@ -277,6 +287,7 @@ body {
   font-weight: 650;
   letter-spacing: -0.01em;
   margin-bottom: 8px;
+  color: var(--cyan);
 }
 
 .topic-body {
@@ -339,9 +350,11 @@ body {
   border-color: var(--accent);
 }
 
+/* Bloque de código: SIEMPRE con el tema por defecto de IntelliJ (Darcula),
+   sin importar el tema de la interfaz. */
 pre {
-  background: var(--bg-code);
-  border: 1px solid var(--border);
+  background: #2b2b2b;          /* fondo del editor Darcula */
+  border: 1px solid #3c3f41;
   border-radius: 10px;
   padding: 18px 20px;
   overflow-x: auto;
@@ -354,20 +367,18 @@ code {
   color: var(--text);
 }
 
-/* Tokens del resaltador (paleta de terminal kitty) */
-.tok-keyword { color: #ff5d8f; font-weight: 600; }   /* rosa/magenta */
-.tok-string { color: #98c379; }                       /* verde */
-.tok-comment { color: #6b6b6b; font-style: italic; }  /* gris */
-.tok-number { color: #e5c07b; }                       /* amarillo */
-.tok-type { color: #56b6c2; }                         /* cian */
-.tok-annotation { color: #e5c07b; }                   /* amarillo */
-.tok-fn { color: #61afef; }                           /* azul */
+pre code {
+  color: #a9b7c6;              /* texto por defecto de Darcula */
+}
 
-:root[data-theme='light'] .tok-keyword { color: #b5290e; }
-:root[data-theme='light'] .tok-string { color: #3c7a2e; }
-:root[data-theme='light'] .tok-number { color: #8b3aa8; }
-:root[data-theme='light'] .tok-type { color: #1a8a78; }
-:root[data-theme='light'] .tok-fn { color: #2a6fb5; }
+/* Tokens del resaltador con los colores por defecto de IntelliJ (Darcula) */
+.tok-keyword { color: #cc7832; font-weight: 600; }   /* naranja */
+.tok-string { color: #6a8759; }                       /* verde */
+.tok-comment { color: #808080; font-style: italic; }  /* gris */
+.tok-number { color: #6897bb; }                       /* azul */
+.tok-type { color: #a9b7c6; }                         /* clases: color por defecto */
+.tok-annotation { color: #bbb529; }                   /* amarillo-verde */
+.tok-fn { color: #ffc66d; }                           /* dorado (métodos) */
 
 /* ---------- Misc ---------- */
 .empty {
@@ -394,6 +405,302 @@ code {
   border-top: 1px solid var(--border);
   color: var(--text-soft);
   font-size: 13px;
+}
+
+/* ---------- Atajos de IDE ---------- */
+.ide-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.ide-tab {
+  padding: 8px 16px;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text-soft);
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.12s;
+}
+
+.ide-tab:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+.ide-tab.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  font-weight: 600;
+}
+
+.ide-note {
+  color: var(--text-soft);
+  font-size: 13.5px;
+  margin-bottom: 22px;
+}
+
+.ide-heading {
+  font-size: 17px;
+  margin: 28px 0 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border);
+}
+
+.sc-group {
+  margin-bottom: 24px;
+  overflow-x: auto;
+}
+
+.sc-group-title {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent-soft);
+  margin-bottom: 8px;
+}
+
+.sc-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.sc-table th {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-soft);
+  padding: 10px 14px;
+  background: var(--bg-code);
+  border-bottom: 1px solid var(--border);
+}
+
+.sc-table td {
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.sc-table tr:last-child td {
+  border-bottom: none;
+}
+
+.sc-table tbody tr:hover {
+  background: var(--nav-hover);
+}
+
+.sc-action {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.keys {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+
+.key-combo {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.key-or {
+  color: var(--text-soft);
+  font-size: 11px;
+  margin: 0 2px;
+}
+
+kbd {
+  display: inline-block;
+  min-width: 20px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--text);
+  background: var(--bg-code);
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  padding: 2px 6px;
+}
+
+/* ---------- Nav destacado ---------- */
+.nav-item.featured {
+  color: var(--accent);
+  border: 1px dashed color-mix(in srgb, var(--accent) 55%, transparent);
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.nav-item.featured:hover {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  color: var(--accent);
+}
+
+.nav-item.featured.active {
+  background: var(--accent);
+  color: #fff;
+  border-style: solid;
+}
+
+/* ---------- Plantillas (live templates) ---------- */
+.sout-hero {
+  background: color-mix(in srgb, var(--accent) 9%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  margin-bottom: 28px;
+}
+
+.sout-demo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.sout-arrow {
+  color: var(--text-soft);
+  font-size: 13px;
+}
+
+.sout-hero p {
+  font-size: 14px;
+  color: var(--text);
+}
+
+.sout-hero code {
+  background: var(--bg-code);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 12.5px;
+}
+
+.tpl-group {
+  margin-bottom: 26px;
+  overflow-x: auto;
+}
+
+.tpl-group.featured {
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+}
+
+.tpl-group-title {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--accent-soft);
+  margin-bottom: 10px;
+}
+
+.tpl-group.featured .tpl-group-title {
+  color: var(--accent);
+}
+
+.star {
+  color: var(--accent);
+}
+
+.tpl-group-note {
+  font-size: 13px;
+  color: var(--text-soft);
+  margin-bottom: 12px;
+}
+
+.tpl-group-note code,
+.sout-arrow code {
+  background: var(--bg-code);
+  padding: 1px 5px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.tpl-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.tpl-table th {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-soft);
+  padding: 10px 14px;
+  background: var(--bg-code);
+  border-bottom: 1px solid var(--border);
+}
+
+.tpl-table td {
+  padding: 9px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.tpl-table tr:last-child td {
+  border-bottom: none;
+}
+
+.tpl-table tbody tr:hover {
+  background: var(--nav-hover);
+}
+
+.tpl-abbr {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  padding: 2px 8px;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
+.tpl-expand {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--green);
+}
+
+.tpl-abbr.big {
+  font-size: 17px;
+  padding: 6px 14px;
+}
+
+.tpl-expand.big {
+  font-size: 14px;
+  background: var(--bg-code);
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.tpl-desc {
+  font-size: 13px;
+  color: var(--text-soft);
 }
 
 /* ---------- Responsive ---------- */
