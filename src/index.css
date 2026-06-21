@@ -1,10 +1,14 @@
 :root {
-  --accent: #e76f00;        /* naranja Java */
-  --accent-soft: #f8a01f;
-  --radius: 12px;
+  --accent: #ff5d8f;        /* rosa/magenta (prompt de kitty) */
+  --accent-soft: #e5c07b;   /* amarillo cálido */
+  --green: #98c379;         /* verde (cursor/strings) */
+  --cyan: #56b6c2;          /* cian (rutas/tipos) */
+  --blue: #61afef;
+  --radius: 6px;            /* esquinas más cuadradas, estilo terminal */
   --sidebar-w: 290px;
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  --font-mono: 'SF Mono', 'JetBrains Mono', 'Fira Code', Menlo, Consolas, monospace;
+  /* Tipografía monoespaciada en toda la app, como en la terminal */
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Menlo, Consolas, 'Courier New', monospace;
+  --font-sans: var(--font-mono);
 }
 
 :root[data-theme='light'] {
@@ -19,14 +23,14 @@
 }
 
 :root[data-theme='dark'] {
-  --bg: #16181d;
-  --bg-elev: #1d2026;
-  --bg-code: #15171c;
-  --text: #e6e8eb;
-  --text-soft: #9aa1ad;
-  --border: #2b2f37;
-  --nav-hover: #252932;
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.25);
+  --bg: #161616;            /* fondo oscuro cálido tipo kitty */
+  --bg-elev: #1c1c1c;
+  --bg-code: #121212;
+  --text: #d6d2c4;         /* crema/off-white cálido */
+  --text-soft: #8a8678;
+  --border: #2c2c2c;
+  --nav-hover: #242424;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.5), 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
 * {
@@ -85,6 +89,11 @@ body {
   font-size: 18px;
   font-weight: 700;
   letter-spacing: -0.02em;
+}
+
+.brand h1::before {
+  content: '❯ ';
+  color: var(--green);   /* prompt verde estilo terminal */
 }
 
 .brand p {
@@ -214,8 +223,9 @@ body {
   color: var(--text);
   background: var(--bg-elev);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: var(--radius);
   outline: none;
+  caret-color: var(--green);   /* cursor verde, como en la terminal */
   transition: border-color 0.15s, box-shadow 0.15s;
 }
 
@@ -344,14 +354,14 @@ code {
   color: var(--text);
 }
 
-/* Tokens del resaltador */
-.tok-keyword { color: #cf6a4c; font-weight: 600; }
-.tok-string { color: #6a9955; }
-.tok-comment { color: var(--text-soft); font-style: italic; }
-.tok-number { color: #b07cc6; }
-.tok-type { color: #4ec9b0; }
-.tok-annotation { color: var(--accent-soft); }
-.tok-fn { color: #5a9bd5; }
+/* Tokens del resaltador (paleta de terminal kitty) */
+.tok-keyword { color: #ff5d8f; font-weight: 600; }   /* rosa/magenta */
+.tok-string { color: #98c379; }                       /* verde */
+.tok-comment { color: #6b6b6b; font-style: italic; }  /* gris */
+.tok-number { color: #e5c07b; }                       /* amarillo */
+.tok-type { color: #56b6c2; }                         /* cian */
+.tok-annotation { color: #e5c07b; }                   /* amarillo */
+.tok-fn { color: #61afef; }                           /* azul */
 
 :root[data-theme='light'] .tok-keyword { color: #b5290e; }
 :root[data-theme='light'] .tok-string { color: #3c7a2e; }
