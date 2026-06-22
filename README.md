@@ -6,7 +6,8 @@ atajos de IDE y plantillas de código a un clic.
 
 > ⚡ Esta app está **vibecodeada**. No es un
 > producto pulido ni pretende serlo: es una herramienta práctica para mi día a día (make no mistakes).
-> Solamente publico esta herramienta por el hecho de que pueda ser de ayuda a algun usuario.
+> Solamente publico esta herramienta por el hecho de que pueda ser de ayuda a algun usuario, no pienso documentarla mas de lo necesario.
+> Tampoco llevo un control estricto de versiones.
 
 ## Qué incluye
 
