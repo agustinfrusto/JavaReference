@@ -4,8 +4,9 @@ App de escritorio para consultar de forma ordenada la sintaxis y el funcionamien
 Una **herramienta personal** que uso de apoyo mientras trabajo con Java: referencia rápida,
 atajos de IDE y plantillas de código a un clic.
 
-> ⚡ Esta app está **vibecodeada** (hecha a base de prompts con un asistente de IA). No es un
-> producto pulido ni pretende serlo: es una herramienta práctica para mi día a día.
+> ⚡ Esta app está **vibecodeada**. No es un
+> producto pulido ni pretende serlo: es una herramienta práctica para mi día a día (make no mistakes).
+> Solamente publico esta herramienta por el hecho de que pueda ser de ayuda a algun usuario.
 
 ## Qué incluye
 
