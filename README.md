@@ -1,4 +1,4 @@
-# ☕ JavaSpresso
+# ☕ JavaReference
 
 App de escritorio para consultar de forma ordenada la sintaxis y el funcionamiento de Java.
 Una **herramienta personal** que uso de apoyo mientras trabajo con Java: referencia rápida,

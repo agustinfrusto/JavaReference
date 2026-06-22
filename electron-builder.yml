@@ -1,7 +1,7 @@
 # Configuración de empaquetado de Electron (la lee electron-builder automáticamente).
 # Se mantiene fuera de package.json para que no se pierda si ese archivo se revierte.
-appId: com.javaspresso.app
-productName: JavaSpresso
+appId: com.javareference.app
+productName: JavaReference
 directories:
   output: release
 files:
